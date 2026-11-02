@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ders Asistanı</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK (Modüler Sürüm) -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+      import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+      
+      // Global olarak erişebilmek için window'a ekliyoruz
+      window.firebaseModules = { initializeApp, getFirestore, collection, getDocs, addDoc, deleteDoc, doc };
+    </script>
+</head>
+<body>
+
+    <div class="layout">
+        <!-- Sol Menü -->
+        <aside class="sidebar">
+            <h2 class="logo">📚 Ders Asistanı</h2>
+            
+            <div class="admin-actions">
+                <button class="btn btn-add" onclick="modalAc('dersModal')">+ Ders Ekle</button>
+            </div>
+
+            <div id="ders-listesi" class="menu-group">
+                <!-- Dersler ve Konular Firebase'den yüklenecek -->
+            </div>
+        </aside>
+
+        <!-- Sağ Ana İçerik -->
+        <main class="content">
+            <header class="content-header">
+                <h1 id="secili-ders-baslik">Lütfen Bir Konu Seçin</h1>
+                <p id="secili-ders-aciklama">Sol menüden bir konu seçerek ders anlatımına başlayabilirsiniz.</p>
+            </header>
+
+            <section id="konu-icerik" class="konu-container">
+                <!-- Konu özeti ve örnekler buraya yüklenecek -->
+            </section>
+        </main>
+    </div>
+
+    <!-- Ders Ekleme Penceresi (Modal) -->
+    <div id="dersModal" class="modal">
+        <div class="modal-content">
+            <h3>Yeni Ders Ekle</h3>
+            <input type="text" id="yeniDersAdi" placeholder="Ders Adı (Örn: Python Programming)">
+            <input type="text" id="yeniDersAciklama" placeholder="Açıklama (Örn: Temel Seviye)">
+            <div class="modal-buttons">
+                <button class="btn btn-save" onclick="dersEkle()">Kaydet</button>
+                <button class="btn btn-cancel" onclick="modalKapat('dersModal')">İptal</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
